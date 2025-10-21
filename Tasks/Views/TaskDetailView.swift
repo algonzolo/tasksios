@@ -49,10 +49,10 @@ struct TaskDetailView: View {
     private var taskInfoSection: some View {
         Section {
             TextField("Название задачи", text: $taskName)
-                .onChange(of: taskName) { _, _ in hasChanges = true }
+                .onChange(of: taskName) { _ in hasChanges = true }
             
             Toggle("Выполнено", isOn: $isCompleted)
-                .onChange(of: isCompleted) { _, _ in hasChanges = true }
+                .onChange(of: isCompleted) { _ in hasChanges = true }
         } header: {
             Text("Информация о задаче")
         }
@@ -96,7 +96,7 @@ struct TaskDetailView: View {
                 Text(photoImage == nil ? "Добавить фото" : "Изменить фото")
             }
         }
-        .onChange(of: selectedPhoto) { _, newValue in
+        .onChange(of: selectedPhoto) { newValue in
             _Concurrency.Task {
                 if let data = try? await newValue?.loadTransferable(type: Data.self) {
                     photoImage = UIImage(data: data)

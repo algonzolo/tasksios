@@ -44,7 +44,7 @@ struct AddTaskView: View {
                             Text(photoImage == nil ? "Добавить фото" : "Изменить фото")
                         }
                     }
-                    .onChange(of: selectedPhoto) { _, newValue in
+                    .onChange(of: selectedPhoto) { newValue in
                         _Concurrency.Task {
                             if let data = try? await newValue?.loadTransferable(type: Data.self) {
                                 photoImage = UIImage(data: data)
